@@ -15,6 +15,7 @@ import {
 import { ContactModal } from "@/components/contact-modal";
 import { ProductMockup } from "@/components/product-mockup";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { SiteNavbar } from "@/components/site-navbar";
 import { StickyCapabilities } from "@/components/sticky-capabilities";
 import { assetPath } from "@/lib/asset-path";
 
@@ -85,36 +86,7 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_color-mix(in_srgb,var(--color-primary)_22%,transparent),_transparent_34%),radial-gradient(circle_at_80%_20%,_color-mix(in_srgb,var(--color-border-active)_34%,transparent),_transparent_30%),linear-gradient(135deg,_var(--color-surface),_var(--color-canvas))]" />
       <div className="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
 
-      <header className="fixed inset-x-0 top-8 z-50 px-6 sm:px-10 lg:px-12">
-        <nav className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-border-subtle bg-surface/70 px-5 py-4 shadow-2xl shadow-black/20 backdrop-blur-xl">
-          <a href="#" className="flex items-center" aria-label="Nexi code">
-            <Image
-              src={assetPath("/brand/logotipo-nexicode.svg")}
-              alt="Nexi code"
-              width={630}
-              height={124}
-              priority
-              className="h-7 w-auto sm:h-8"
-            />
-          </a>
-          <div className="hidden items-center gap-6 text-sm font-medium text-text-muted md:flex">
-            <a href="#capacidades" className="transition hover:text-primary">
-              Capacidades
-            </a>
-            <a href="#integraciones" className="transition hover:text-primary">
-              Integraciones
-            </a>
-            <a href="#contexto" className="transition hover:text-primary">
-              Contexto
-            </a>
-          </div>
-          <ContactModal>
-            <span className="hidden rounded-full border border-border-subtle px-5 py-2.5 text-sm font-medium text-text-muted transition hover:border-border-active hover:text-text-primary sm:inline-flex">
-              Agenda una demo
-            </span>
-          </ContactModal>
-        </nav>
-      </header>
+      <SiteNavbar />
 
       <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pb-8 pt-36 sm:px-10 lg:px-12">
         <div className="flex flex-1 items-center justify-center py-20 lg:py-24">
