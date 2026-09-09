@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexi code Landing Page
 
-## Getting Started
+Landing page para **Nexi code**, una terminal de escritorio para macOS que reúne shells, archivos, Git y agentes de programación en un mismo espacio de trabajo.
 
-First, run the development server:
+El sitio está construido con Next.js, React, TypeScript, Tailwind CSS v4 y un sistema simple de tokens generado desde `design.md`.
+
+## Características
+
+- Dark mode por defecto.
+- Landing responsive con Hero, secciones de funcionalidades, integraciones, producto, CTA y footer.
+- Mockup interactivo del producto con parallax 3D.
+- Simulación de agentes Tech Lead, Developer y QA.
+- Modal de contacto para solicitar demo o enviar mensaje.
+- Tokens de diseño editables desde `design.md`.
+- Deploy estático preparado para GitHub Pages.
+
+## Requisitos
+
+- Node.js 24 o superior recomendado.
+- npm.
+
+## Desarrollo local
+
+Instala dependencias:
+
+```bash
+npm install
+```
+
+Levanta el entorno de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre `http://localhost:3000` en el navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design Tokens
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Los colores principales viven en `design.md` dentro de un bloque `@theme`.
 
-## Learn More
+Cuando ejecutas `npm run dev`, el proyecto observa cambios en `design.md` y regenera automáticamente:
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/app/tokens.css
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+También puedes sincronizar tokens manualmente:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run tokens
+```
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run dev      # Next dev + watcher de tokens
+npm run tokens   # Genera src/app/tokens.css desde design.md
+npm run lint     # Ejecuta ESLint
+npm run build    # Genera export estático en out/
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estructura Principal
+
+```text
+src/app/page.tsx                 # Landing page
+src/app/layout.tsx               # Metadata, fuentes y favicon
+src/app/globals.css              # Tailwind + tokens globales
+src/app/tokens.css               # Archivo generado desde design.md
+src/components/product-mockup.tsx # Mockup interactivo del producto
+src/components/contact-modal.tsx  # Modal de contacto
+src/components/scroll-reveal.tsx  # Animaciones on-scroll
+scripts/sync-design-tokens.mjs    # Generador de tokens
+scripts/dev-with-tokens.mjs       # Dev server + watcher de tokens
+public/brand/                    # Logos, favicon y assets de marca
+```
+
+## GitHub Pages
+
+El proyecto está configurado con `output: "export"` en `next.config.ts`, por lo que `npm run build` genera el sitio estático en `out/`.
+
+El workflow `.github/workflows/pages.yml` despliega automáticamente a GitHub Pages cuando se hace push a `main`.
+
+Para habilitarlo en GitHub:
+
+- Ir a `Settings` del repositorio.
+- Entrar a `Pages`.
+- En `Build and deployment`, seleccionar `GitHub Actions`.
+
+URL esperada después del deploy:
+
+```text
+https://cleveritdemo.github.io/lp-nexicode/
+```
+
+## Marca
+
+Los assets de marca están en `public/brand/`:
+
+- `logotipo-nexicode.svg`
+- `logotipo-nexicode-footer.svg`
+- `favicon.svg`
+- `isotipo-nexicode.svg`
+- `user.png`
+
+## Contacto
+
+El formulario del modal usa `mailto:` apuntando a:
+
+```text
+hola@nexicode.dev
+```
+
+Puedes cambiar ese correo en `src/components/contact-modal.tsx`.
