@@ -90,7 +90,7 @@ Para habilitarlo en GitHub:
 URL esperada después del deploy:
 
 ```text
-https://scaling-disco-r21p7rj.pages.github.io/
+https://cleveritdemo.github.io/lp-nexicode/
 ```
 
 ## Marca
