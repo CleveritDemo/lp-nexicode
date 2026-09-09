@@ -73,7 +73,7 @@ export function ContactModal({ children }: ContactModalProps) {
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-border-subtle bg-surface p-6 shadow-2xl shadow-black/60 sm:p-8">
+          <div className="border-glow relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-border-subtle bg-surface p-6 shadow-2xl shadow-black/60 sm:p-8">
             <button
               type="button"
               aria-label="Cerrar modal"
@@ -99,7 +99,7 @@ export function ContactModal({ children }: ContactModalProps) {
               <button
                 type="button"
                 onClick={() => setIntent("demo")}
-                className={`rounded-2xl border p-4 text-left transition ${
+                className={`border-glow rounded-2xl border p-4 text-left transition ${
                   intent === "demo"
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border-subtle bg-surface-elevated text-text-muted hover:border-border-active"
@@ -111,7 +111,7 @@ export function ContactModal({ children }: ContactModalProps) {
               <button
                 type="button"
                 onClick={() => setIntent("message")}
-                className={`rounded-2xl border p-4 text-left transition ${
+                className={`border-glow rounded-2xl border p-4 text-left transition ${
                   intent === "message"
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border-subtle bg-surface-elevated text-text-muted hover:border-border-active"

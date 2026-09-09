@@ -23,3 +23,61 @@ body {
   background: var(--color-primary);
   color: var(--color-primary-fg);
 }
+
+.border-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-glow-angle, 0deg),
+    transparent 0deg,
+    transparent 80deg,
+    color-mix(in srgb, var(--color-primary) 75%, transparent) 130deg,
+    color-mix(in srgb, var(--color-border-active) 70%, transparent) 170deg,
+    transparent 230deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.border-glow::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  z-index: -2;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-primary) 22%, transparent),
+    transparent 62%
+  );
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.border-glow:hover::before,
+.border-glow:hover::after {
+  opacity: 1;
+  animation: border-glow-spin 2.8s linear infinite;
+}
+
+@property --border-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-glow-spin {
+  to {
+    --border-glow-angle: 360deg;
+  }
+}

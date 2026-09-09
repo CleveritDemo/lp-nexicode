@@ -169,7 +169,7 @@ export default function Home() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
           <ScrollReveal
-            className="rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
+            className="border-glow rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
             delay={100}
           >
             <span className="text-sm font-medium text-primary">Workspace</span>
@@ -187,7 +187,7 @@ export default function Home() {
           </ScrollReveal>
 
           <ScrollReveal
-            className="rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
+            className="border-glow rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
             delay={200}
           >
             <span className="text-sm font-medium text-primary">Agentes</span>
@@ -225,7 +225,7 @@ export default function Home() {
           {contextItems.map(({ title, icon: Icon }, index) => (
             <ScrollReveal
               key={title}
-              className={`group rounded-3xl border border-border-subtle bg-surface-elevated p-5 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40 ${
+              className={`border-glow group rounded-3xl border border-border-subtle bg-surface-elevated p-5 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40 ${
                 index % 2 === 0 ? "sm:-translate-y-8" : "sm:translate-y-14"
               }`}
               delay={index * 60}
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
-        <ScrollReveal className="rounded-[2.5rem] border border-border-subtle bg-surface/80 p-6 sm:p-10">
+        <ScrollReveal className="border-glow rounded-[2.5rem] border border-border-subtle bg-surface/80 p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
@@ -259,7 +259,7 @@ export default function Home() {
               {integrationCards.map(({ title, icon: Icon, description }, index) => (
                 <ScrollReveal
                   key={title}
-                  className="group rounded-3xl border border-border-subtle bg-surface-elevated p-6 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40"
+                  className="border-glow group rounded-3xl border border-border-subtle bg-surface-elevated p-6 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40"
                   delay={index * 80}
                 >
                   <Icon className="size-6 text-text-dim transition group-hover:translate-z-4 group-hover:text-primary" />
@@ -300,7 +300,7 @@ export default function Home() {
         id="contacto"
         className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:px-10 lg:px-12"
       >
-        <ScrollReveal className="overflow-hidden rounded-[2.5rem] border border-border-active bg-primary p-8 text-primary-fg sm:p-12 lg:p-16">
+        <ScrollReveal className="border-glow overflow-hidden rounded-[2.5rem] border border-border-active bg-primary p-8 text-primary-fg sm:p-12 lg:p-16">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.35em] opacity-70">
               Solicita una demo

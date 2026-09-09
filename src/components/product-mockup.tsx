@@ -394,7 +394,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
       onMouseLeave={resetTilt}
     >
       <div
-        className="relative overflow-visible rounded-2xl border border-border-subtle bg-[#07080a] shadow-2xl shadow-black/60 ring-1 ring-white/5 transition-transform duration-300 ease-out will-change-transform"
+        className="border-glow relative overflow-visible rounded-2xl border border-border-subtle bg-[#07080a] shadow-2xl shadow-black/60 ring-1 ring-white/5 transition-transform duration-300 ease-out will-change-transform"
         style={{
           transform: `rotateX(${tilt.y * -18}deg) rotateY(${tilt.x * 24}deg) scale3d(1.04, 1.04, 1) translateZ(0)`,
           transformStyle: "preserve-3d",
@@ -470,7 +470,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                     key={agent.role}
                     type="button"
                     onClick={() => selectAgent(index)}
-                    className={`relative w-full rounded-lg border bg-surface/70 p-3 text-left transition duration-300 hover:border-border-active ${
+                    className={`border-glow relative w-full rounded-lg border bg-surface/70 p-3 text-left transition duration-300 hover:border-border-active ${
                       isActive
                         ? "z-20 -translate-x-3 scale-[1.03] border-primary shadow-[0_0_0_1px_var(--color-primary),0_24px_50px_rgba(0,0,0,0.45)]"
                         : "border-border-subtle"
@@ -783,7 +783,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     </div>
     </div>
     {isProductVariant ? (
-      <div className="rounded-2xl border border-border-subtle bg-surface/80 px-5 py-5 backdrop-blur">
+      <div className="border-glow rounded-2xl border border-border-subtle bg-surface/80 px-5 py-5 backdrop-blur">
         <div className="relative h-7">
           <div className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-surface-subtle" />
           <div
