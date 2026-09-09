@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://cleveritdemo.github.io/lp-nexicode/sitemap.xml
+Sitemap: https://nexicode.ai/sitemap.xml
