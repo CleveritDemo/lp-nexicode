@@ -70,6 +70,10 @@ const copy = {
     downloadWindows: "Windows",
     downloadLinux: "Linux",
     downloadSoon: "Próximamente",
+    downloadMacNote: "Apple Silicon",
+    downloadMacIntel: "Intel",
+    downloadWindowsNote: "Instalador x64",
+    downloadLinuxNote: "AppImage x86_64",
   },
   en: {
     heroBadge: "Desktop terminal",
@@ -115,7 +119,22 @@ const copy = {
     downloadWindows: "Windows",
     downloadLinux: "Linux",
     downloadSoon: "Coming soon",
+    downloadMacNote: "Apple Silicon",
+    downloadMacIntel: "Intel",
+    downloadWindowsNote: "x64 installer",
+    downloadLinuxNote: "AppImage x86_64",
   },
+};
+
+const DOWNLOAD_BASE = "https://downloads.nexicode.ai";
+const APP_VERSION = "0.1.0";
+const downloads = {
+  macArm: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-arm64.dmg`,
+  macIntel: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-x64.dmg`,
+  windows: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-setup-x64.exe`,
+  linuxAppImage: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-x86_64.AppImage`,
+  linuxDeb: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-amd64.deb`,
+  linuxPacman: `${DOWNLOAD_BASE}/Nexicode-${APP_VERSION}-x64.pacman`,
 };
 
 const workspaceFeatures = {
@@ -456,10 +475,11 @@ export default function Home() {
             {t.downloadDescription}
           </p>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:items-start">
             {/* macOS */}
+            <div className="flex w-full flex-col items-center gap-2 sm:w-auto">
             <a
-              href="#"
+              href={downloads.macArm}
               className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
             >
               <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -468,10 +488,18 @@ export default function Home() {
               </svg>
               {t.downloadMac}
             </a>
+              <p className="text-xs text-text-muted">
+                {t.downloadMacNote} ·{" "}
+                <a href={downloads.macIntel} className="underline-offset-4 hover:text-primary hover:underline">
+                  {t.downloadMacIntel}
+                </a>
+              </p>
+            </div>
 
             {/* Windows */}
+            <div className="flex w-full flex-col items-center gap-2 sm:w-auto">
             <a
-              href="#"
+              href={downloads.windows}
               className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
             >
               <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -481,10 +509,13 @@ export default function Home() {
               </svg>
               {t.downloadWindows}
             </a>
+              <p className="text-xs text-text-muted">{t.downloadWindowsNote}</p>
+            </div>
 
             {/* Linux */}
+            <div className="flex w-full flex-col items-center gap-2 sm:w-auto">
             <a
-              href="#"
+              href={downloads.linuxAppImage}
               className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
             >
               <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -495,6 +526,17 @@ export default function Home() {
               </svg>
               {t.downloadLinux}
             </a>
+              <p className="text-xs text-text-muted">
+                {t.downloadLinuxNote} ·{" "}
+                <a href={downloads.linuxDeb} className="underline-offset-4 hover:text-primary hover:underline">
+                  .deb
+                </a>{" "}
+                ·{" "}
+                <a href={downloads.linuxPacman} className="underline-offset-4 hover:text-primary hover:underline">
+                  .pacman
+                </a>
+              </p>
+            </div>
           </div>
         </ScrollReveal>
       </section>
