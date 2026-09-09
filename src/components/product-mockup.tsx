@@ -18,6 +18,7 @@ import {
   Settings,
 } from "lucide-react";
 import { useEffect, useState, useEffectEvent } from "react";
+import { useLanguage } from "@/components/language-provider";
 import { ProductActionsMenu } from "@/components/product-actions-menu";
 import { assetPath } from "@/lib/asset-path";
 
@@ -62,9 +63,11 @@ function TypewriterMessage({
 }
 
 function ThinkingState() {
+  const { language } = useLanguage();
+
   return (
     <div className="mt-3 flex items-center gap-2 text-xs text-text-muted">
-      <span>Pensando</span>
+      <span>{language === "es" ? "Pensando" : "Thinking"}</span>
       <span className="flex gap-1">
         <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-0.2s]" />
         <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-0.1s]" />
@@ -94,48 +97,75 @@ function TypedText({
 }
 
 const productTabs = [
-  { label: "Agents", icon: Bot },
+  { label: { es: "Agentes", en: "Agents" }, icon: Bot },
   { label: "Git", icon: GitBranch },
-  { label: "Metrics", icon: BarChart3 },
-  { label: "Previews", icon: PanelsTopLeft },
-  { label: "Context", icon: FileText },
-  { label: "Brain", icon: Brain },
-  { label: "Files", icon: FolderTree },
+  { label: { es: "Métricas", en: "Metrics" }, icon: BarChart3 },
+  { label: { es: "Previews", en: "Previews" }, icon: PanelsTopLeft },
+  { label: { es: "Contexto", en: "Context" }, icon: FileText },
+  { label: { es: "Brain", en: "Brain" }, icon: Brain },
+  { label: { es: "Archivos", en: "Files" }, icon: FolderTree },
 ];
 
 const productAgents = [
   {
     initials: "TL",
     role: "Tech Lead",
-    intro:
-      "Hola, soy tu agente Tech Lead. Puedo ayudarte a ordenar decisiones tecnicas, riesgos y planes de entrega.",
-    request:
-      "Analiza esta issue de Jira y proponme un plan tecnico para dividirla en tareas ejecutables.",
-    response:
-      "Entendido. Voy a separar la issue en arquitectura, riesgos y tareas ejecutables para que el equipo pueda avanzar con claridad.",
-    results: ["Arquitectura propuesta", "Riesgos priorizados", "Plan en 5 tareas"],
+    intro: {
+      es: "Hola, soy tu agente Tech Lead. Puedo ayudarte a ordenar decisiones técnicas, riesgos y planes de entrega.",
+      en: "Hi, I am your Tech Lead agent. I can help organize technical decisions, risks and delivery plans.",
+    },
+    request: {
+      es: "Analiza esta issue de Jira y proponme un plan técnico para dividirla en tareas ejecutables.",
+      en: "Analyze this Jira issue and propose a technical plan to split it into executable tasks.",
+    },
+    response: {
+      es: "Entendido. Voy a separar la issue en arquitectura, riesgos y tareas ejecutables para que el equipo pueda avanzar con claridad.",
+      en: "Understood. I will split the issue into architecture, risks and executable tasks so the team can move forward clearly.",
+    },
+    results: {
+      es: ["Arquitectura propuesta", "Riesgos priorizados", "Plan en 5 tareas"],
+      en: ["Architecture proposal", "Prioritized risks", "5-task plan"],
+    },
   },
   {
     initials: "DV",
     role: "Developer",
-    intro:
-      "Hola, soy tu agente Developer. Puedo trabajar con archivos, terminales y cambios concretos del repositorio.",
-    request:
-      "Implementa el flujo de permisos Ask, Auto y Plan usando los archivos seleccionados como contexto.",
-    response:
-      "Entendido. El requerimiento necesita estados de permiso claros, ejecucion segura y persistencia del modo seleccionado. Voy a actualizar los componentes del flujo, conectar la logica con los archivos relevantes y dejar comandos de validacion para confirmar que Ask, Auto y Plan funcionen como corresponde.",
-    results: ["Archivos actualizados", "Comandos ejecutados", "Checklist para PR"],
+    intro: {
+      es: "Hola, soy tu agente Developer. Puedo trabajar con archivos, terminales y cambios concretos del repositorio.",
+      en: "Hi, I am your Developer agent. I can work with files, terminals and concrete repository changes.",
+    },
+    request: {
+      es: "Implementa el flujo de permisos Ask, Auto y Plan usando los archivos seleccionados como contexto.",
+      en: "Implement the Ask, Auto and Plan permission flow using the selected files as context.",
+    },
+    response: {
+      es: "Entendido. El requerimiento necesita estados de permiso claros, ejecución segura y persistencia del modo seleccionado. Voy a actualizar los componentes del flujo, conectar la lógica con los archivos relevantes y dejar comandos de validación para confirmar que Ask, Auto y Plan funcionen como corresponde.",
+      en: "Understood. This requires clear permission states, safe execution and persistence for the selected mode. I will update the flow components, connect the logic to the relevant files and leave validation commands for Ask, Auto and Plan.",
+    },
+    results: {
+      es: ["Archivos actualizados", "Comandos ejecutados", "Checklist para PR"],
+      en: ["Files updated", "Commands executed", "PR checklist"],
+    },
   },
   {
     initials: "QA",
     role: "QA",
-    intro:
-      "Hola, soy tu agente QA. Puedo revisar riesgos, validar escenarios y ayudarte a publicar con mas confianza.",
-    request:
-      "Revisa los cambios staged y dime que escenarios debo probar antes de publicar.",
-    response:
-      "Entendido. Antes de publicar conviene validar los cambios staged contra los flujos criticos del workspace. Voy a priorizar riesgos de regresion, revisar interacciones entre terminal, Git y agentes, y convertirlo en una matriz de pruebas accionable para aprobar el release con confianza.",
-    results: ["Matriz de pruebas", "Riesgos de regresion", "Casos criticos"],
+    intro: {
+      es: "Hola, soy tu agente QA. Puedo revisar riesgos, validar escenarios y ayudarte a publicar con más confianza.",
+      en: "Hi, I am your QA agent. I can review risks, validate scenarios and help you ship with more confidence.",
+    },
+    request: {
+      es: "Revisa los cambios staged y dime qué escenarios debo probar antes de publicar.",
+      en: "Review the staged changes and tell me which scenarios I should test before publishing.",
+    },
+    response: {
+      es: "Entendido. Antes de publicar conviene validar los cambios staged contra los flujos críticos del workspace. Voy a priorizar riesgos de regresión, revisar interacciones entre terminal, Git y agentes, y convertirlo en una matriz de pruebas accionable.",
+      en: "Understood. Before publishing, the staged changes should be validated against critical workspace flows. I will prioritize regression risks, review terminal, Git and agent interactions, and turn them into an actionable test matrix.",
+    },
+    results: {
+      es: ["Matriz de pruebas", "Riesgos de regresión", "Casos críticos"],
+      en: ["Test matrix", "Regression risks", "Critical cases"],
+    },
   },
 ];
 
@@ -176,14 +206,46 @@ function getAgentIndexFromPhase(phase: ProductPhase) {
   return 0;
 }
 
-const developerResult =
-  "Recibi la instruccion del Tech Lead. Implementé la estructura base del flujo, conecté los modos Ask, Auto y Plan, y dejé los cambios listos para revision con validaciones locales.";
-const developerToQa =
-  "Tarea delegada a QA para validar riesgos, escenarios criticos y pruebas simples antes de publicar.";
-const qaResult =
-  "Ejecuté pruebas simples emuladas sobre el flujo principal: cambio de permisos, persistencia del modo activo, acciones de terminal y revision del estado Git. No detecté bloqueos criticos.";
-const userThanks =
-  "Muchas gracias, me ayudaron mucho. El plan, la implementacion y la validacion quedaron claros para avanzar.";
+const simulationCopy = {
+  es: {
+    developerResult:
+      "Recibí la instrucción del Tech Lead. Implementé la estructura base del flujo, conecté los modos Ask, Auto y Plan, y dejé los cambios listos para revisión con validaciones locales.",
+    developerToQa:
+      "Tarea delegada a QA para validar riesgos, escenarios críticos y pruebas simples antes de publicar.",
+    qaResult:
+      "Ejecuté pruebas simples emuladas sobre el flujo principal: cambio de permisos, persistencia del modo activo, acciones de terminal y revisión del estado Git. No detecté bloqueos críticos.",
+    userThanks:
+      "Muchas gracias, me ayudaron mucho. El plan, la implementación y la validación quedaron claros para avanzar.",
+    delegationMessage:
+      "Listo. Voy a delegar esto a Developer para implementar la solución y a QA para validar el resultado.",
+    delegatedToDeveloper: "Tarea delegada a Developer",
+    delegatedToQa: "Tarea delegada a QA",
+    user: "Usuario",
+    standingBy: "Standing by",
+    messagePlaceholder: "Message the selected agent...",
+    workspace: "Workspace 2 1 x",
+    active: "activo",
+  },
+  en: {
+    developerResult:
+      "I received the Tech Lead instruction. I implemented the base flow structure, connected Ask, Auto and Plan modes, and left the changes ready for review with local validations.",
+    developerToQa:
+      "Task delegated to QA to validate risks, critical scenarios and simple tests before publishing.",
+    qaResult:
+      "I ran simple simulated tests over the main flow: permission changes, active mode persistence, terminal actions and Git status review. No critical blockers were found.",
+    userThanks:
+      "Thank you, this helped a lot. The plan, implementation and validation are clear enough to move forward.",
+    delegationMessage:
+      "Done. I will delegate this to Developer to implement the solution and to QA to validate the result.",
+    delegatedToDeveloper: "Task delegated to Developer",
+    delegatedToQa: "Task delegated to QA",
+    user: "User",
+    standingBy: "Standing by",
+    messagePlaceholder: "Message the selected agent...",
+    workspace: "Workspace 2 1 x",
+    active: "active",
+  },
+};
 
 const productPhaseOrder: ProductPhase[] = [
   "tlIntro",
@@ -206,6 +268,8 @@ const timelineMarkers = [
 ];
 
 export function ProductMockup({ variant = "product" }: ProductMockupProps) {
+  const { language } = useLanguage();
+  const t = simulationCopy[language];
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const isProductVariant = variant === "product";
@@ -216,9 +280,11 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     ? getAgentIndexFromPhase(phase)
     : selectedAgentIndex;
   const selectedAgent = productAgents[activeAgentIndex];
-  const heroMessage = `Hola, soy tu agente de ${selectedAgent.role}. Estoy listo para ayudarte con tu workspace activo.`;
-  const delegationMessage =
-    "Listo. Voy a delegar esto a Developer para implementar la solucion y a QA para validar el resultado.";
+  const heroMessage =
+    language === "es"
+      ? `Hola, soy tu agente de ${selectedAgent.role}. Estoy listo para ayudarte con tu workspace activo.`
+      : `Hi, I am your ${selectedAgent.role} agent. I am ready to help with your active workspace.`;
+  const delegationMessage = t.delegationMessage;
   const prefersReducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -296,14 +362,14 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     }
 
     const textByPhase: Partial<Record<ProductPhase, string>> = {
-      tlIntro: productAgents[0].intro,
-      userRequest: productAgents[0].request,
-      tlResponse: productAgents[0].response,
+      tlIntro: productAgents[0].intro[language],
+      userRequest: productAgents[0].request[language],
+      tlResponse: productAgents[0].response[language],
       tlDelegating: delegationMessage,
-      devResult: developerResult,
-      devToQa: developerToQa,
-      qaResult,
-      userThanks,
+      devResult: t.developerResult,
+      devToQa: t.developerToQa,
+      qaResult: t.qaResult,
+      userThanks: t.userThanks,
     };
     const currentText = textByPhase[phase];
 
@@ -316,7 +382,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     }, 48);
 
     return () => window.clearTimeout(timeout);
-  }, [delegationMessage, isProductVariant, phase, typedLength]);
+  }, [delegationMessage, isProductVariant, language, phase, t, typedLength]);
 
   useEffect(() => {
     if (!isProductVariant || phase !== "tlThinking") {
@@ -348,14 +414,14 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     }
 
     const textByPhase: Partial<Record<ProductPhase, string>> = {
-      tlIntro: productAgents[0].intro,
-      userRequest: productAgents[0].request,
-      tlResponse: productAgents[0].response,
+      tlIntro: productAgents[0].intro[language],
+      userRequest: productAgents[0].request[language],
+      tlResponse: productAgents[0].response[language],
       tlDelegating: delegationMessage,
-      devResult: developerResult,
-      devToQa: developerToQa,
-      qaResult,
-      userThanks,
+      devResult: t.developerResult,
+      devToQa: t.developerToQa,
+      qaResult: t.qaResult,
+      userThanks: t.userThanks,
     };
     const currentText = textByPhase[phase];
 
@@ -384,7 +450,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
     const timeout = window.setTimeout(() => moveToPhase(nextPhase), delay);
 
     return () => window.clearTimeout(timeout);
-  }, [delegationMessage, isProductVariant, phase, typedLength]);
+  }, [delegationMessage, isProductVariant, language, phase, t, typedLength]);
 
   return (
     <div className="space-y-6">
@@ -408,17 +474,23 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
             <span>nexicode</span>
           </div>
           <div className="hidden items-center gap-1 overflow-hidden md:flex">
-            {productTabs.map(({ label, icon: Icon }) => (
-              <span
-                key={label}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-medium ${
-                  label === "Agents" ? "bg-primary/20 text-primary" : "text-text-dim"
-                }`}
-              >
-                <Icon className="size-3.5" />
-                {label}
-              </span>
-            ))}
+            {productTabs.map(({ label, icon: Icon }) => {
+              const tabLabel = typeof label === "string" ? label : label[language];
+
+              return (
+                <span
+                  key={tabLabel}
+                  className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-medium ${
+                    tabLabel === "Agents" || tabLabel === "Agentes"
+                      ? "bg-primary/20 text-primary"
+                      : "text-text-dim"
+                  }`}
+                >
+                  <Icon className="size-3.5" />
+                  {tabLabel}
+                </span>
+              );
+            })}
           </div>
         </div>
         <div className="hidden items-center gap-4 text-text-dim sm:flex">
@@ -456,7 +528,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
             </div>
 
             <div className="mt-12 flex items-center justify-between px-1 text-[10px] uppercase tracking-[0.24em] text-text-dim">
-              <span>Agents</span>
+              <span>{language === "es" ? "Agentes" : "Agents"}</span>
               <span>3</span>
             </div>
 
@@ -494,7 +566,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                         <Box className="size-3" />
                       </span>
                     </div>
-                    <p className="mt-1.5 text-[11px] text-text-muted">Standing by</p>
+                    <p className="mt-1.5 text-[11px] text-text-muted">{t.standingBy}</p>
                     <div className="mt-6 flex justify-end text-text-dim">
                       <File className="size-3.5" />
                     </div>
@@ -522,8 +594,8 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                     </p>
                     {isProductVariant ? (
                       <TypedText
-                        text={getTextForPhase("tlIntro", productAgents[0].intro)}
-                        isTyping={isTyping("tlIntro", productAgents[0].intro)}
+                        text={getTextForPhase("tlIntro", productAgents[0].intro[language])}
+                        isTyping={isTyping("tlIntro", productAgents[0].intro[language])}
                       />
                     ) : (
                       <TypewriterMessage key={selectedAgent.role} message={heroMessage} />
@@ -536,17 +608,17 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                   <div className="ml-auto flex max-w-[88%] items-start justify-end gap-3 text-right">
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-dim">
-                        Usuario
+                        {t.user}
                       </p>
                       <TypedText
-                        text={getTextForPhase("userRequest", productAgents[0].request)}
-                        isTyping={isTyping("userRequest", productAgents[0].request)}
+                        text={getTextForPhase("userRequest", productAgents[0].request[language])}
+                        isTyping={isTyping("userRequest", productAgents[0].request[language])}
                         className="mt-2 min-h-12 rounded-2xl border border-border-subtle bg-surface/80 px-4 py-3 text-sm leading-6 text-text-primary"
                       />
                     </div>
                     <Image
                       src={assetPath("/brand/user.png")}
-                      alt="Usuario"
+                      alt={t.user}
                       width={96}
                       height={96}
                       className="mt-5 size-9 shrink-0 rounded-full border border-border-subtle object-cover"
@@ -573,12 +645,12 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                     {hasReached("tlResponse") ? (
                       <>
                         <TypedText
-                          text={getTextForPhase("tlResponse", productAgents[0].response)}
-                          isTyping={isTyping("tlResponse", productAgents[0].response)}
+                          text={getTextForPhase("tlResponse", productAgents[0].response[language])}
+                          isTyping={isTyping("tlResponse", productAgents[0].response[language])}
                         />
                         {hasReached("tlResults") ? (
                           <div className="mt-3 flex flex-wrap gap-2">
-                            {productAgents[0].results.map((result) => (
+                            {productAgents[0].results[language].map((result) => (
                               <span
                                 key={result}
                                 className="rounded-full border border-border-active bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
@@ -614,7 +686,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                       <div className="flex-1 text-left">
                         <p className="text-xs font-semibold text-primary">TL · Tech Lead</p>
                         <p className="mt-2 rounded-xl border border-border-active bg-primary/10 px-3 py-2 text-sm font-medium text-primary">
-                          Tarea delegada a Developer
+                          {t.delegatedToDeveloper}
                         </p>
                       </div>
                     </div>
@@ -630,13 +702,13 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                     <div className="flex-1 text-left">
                       <p className="text-xs font-semibold text-primary">DV · Developer</p>
                       <TypedText
-                        text={getTextForPhase("devResult", developerResult)}
-                        isTyping={isTyping("devResult", developerResult)}
+                        text={getTextForPhase("devResult", t.developerResult)}
+                        isTyping={isTyping("devResult", t.developerResult)}
                       />
                       {hasReached("devToQa") ? (
                         <TypedText
-                          text={getTextForPhase("devToQa", developerToQa)}
-                          isTyping={isTyping("devToQa", developerToQa)}
+                          text={getTextForPhase("devToQa", t.developerToQa)}
+                          isTyping={isTyping("devToQa", t.developerToQa)}
                           className="mt-4 border-l border-primary pl-3 text-sm leading-6 text-text-muted"
                         />
                       ) : null}
@@ -658,7 +730,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                       <div className="flex-1 text-left">
                         <p className="text-xs font-semibold text-primary">DV · Developer</p>
                         <p className="mt-2 rounded-xl border border-border-active bg-primary/10 px-3 py-2 text-sm font-medium text-primary">
-                          Tarea delegada a QA
+                          {t.delegatedToQa}
                         </p>
                       </div>
                     </div>
@@ -677,12 +749,12 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                       {hasReached("qaResult") ? (
                         <>
                           <TypedText
-                            text={getTextForPhase("qaResult", qaResult)}
-                            isTyping={isTyping("qaResult", qaResult)}
+                            text={getTextForPhase("qaResult", t.qaResult)}
+                            isTyping={isTyping("qaResult", t.qaResult)}
                           />
                           {hasReached("userThanks") ? (
                             <div className="mt-3 flex flex-wrap gap-2">
-                              {productAgents[2].results.map((result) => (
+                              {productAgents[2].results[language].map((result) => (
                                 <span
                                   key={result}
                                   className="rounded-full border border-border-active bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
@@ -703,17 +775,17 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                   <div className="ml-auto flex max-w-[88%] items-start justify-end gap-3 text-right">
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-dim">
-                        Usuario
+                        {t.user}
                       </p>
                       <TypedText
-                        text={getTextForPhase("userThanks", userThanks)}
-                        isTyping={isTyping("userThanks", userThanks)}
+                        text={getTextForPhase("userThanks", t.userThanks)}
+                        isTyping={isTyping("userThanks", t.userThanks)}
                         className="mt-2 min-h-12 rounded-2xl border border-border-subtle bg-surface/80 px-4 py-3 text-sm leading-6 text-text-primary"
                       />
                     </div>
                     <Image
                       src={assetPath("/brand/user.png")}
-                      alt="Usuario"
+                      alt={t.user}
                       width={96}
                       height={96}
                       className="mt-5 size-9 shrink-0 rounded-full border border-border-subtle object-cover"
@@ -761,7 +833,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
                 </button>
                 <div className="flex h-10 flex-1 items-center rounded-md border border-border-subtle bg-surface/90 px-4 font-mono text-xs text-text-dim">
                   <span className="mr-3 text-primary">&gt;</span>
-                  Message the selected agent...
+                  {t.messagePlaceholder}
                 </div>
                 <button
                   className="grid size-10 place-items-center rounded-md bg-primary text-primary-fg"
@@ -776,7 +848,7 @@ export function ProductMockup({ variant = "product" }: ProductMockupProps) {
 
         <div className="absolute bottom-0 left-0 flex h-8 w-44 items-center gap-1.5 border-r border-t border-primary bg-surface px-3 py-2 text-xs font-semibold text-text-muted">
           <PanelsTopLeft className="size-3.5 text-primary" />
-          Workspace 2 1 x
+          {t.workspace}
         </div>
         <ProductActionsMenu actions={productActions} />
       </div>
