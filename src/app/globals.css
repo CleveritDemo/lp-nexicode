@@ -26,14 +26,13 @@ body {
 
 .border-glow {
   position: relative;
-  isolation: isolate;
 }
 
 .border-glow::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  z-index: -1;
+  inset: 0;
+  z-index: 1;
   border-radius: inherit;
   background: conic-gradient(
     from var(--border-glow-angle, 0deg),
@@ -46,6 +45,7 @@ body {
   );
   padding: 1px;
   opacity: 0;
+  pointer-events: none;
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
