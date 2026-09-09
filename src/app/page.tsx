@@ -85,9 +85,9 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_color-mix(in_srgb,var(--color-primary)_22%,transparent),_transparent_34%),radial-gradient(circle_at_80%_20%,_color-mix(in_srgb,var(--color-border-active)_34%,transparent),_transparent_30%),linear-gradient(135deg,_var(--color-surface),_var(--color-canvas))]" />
       <div className="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
 
-      <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 py-8 sm:px-10 lg:px-12">
+      <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-6 pb-8 pt-24 sm:px-10 lg:px-12">
         <ScrollReveal>
-        <nav className="flex items-center justify-between rounded-full border border-border-subtle bg-surface/80 px-5 py-4 backdrop-blur">
+        <nav className="fixed left-1/2 top-5 z-40 flex w-[calc(100%-3rem)] max-w-7xl -translate-x-1/2 items-center justify-between rounded-full border border-border-subtle bg-surface/70 px-5 py-4 shadow-2xl shadow-black/20 backdrop-blur-xl sm:w-[calc(100%-5rem)] lg:w-[calc(100%-6rem)]">
           <a href="#" className="flex items-center" aria-label="Nexi code">
             <Image
               src={assetPath("/brand/logotipo-nexicode.svg")}
