@@ -23,7 +23,10 @@ const capabilities = [
 
 export function StickyCapabilities() {
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
+    <section
+      id="capacidades"
+      className="relative mx-auto w-full max-w-7xl scroll-mt-24 px-6 py-20 sm:px-10 lg:px-12"
+    >
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
           Capacidades clave

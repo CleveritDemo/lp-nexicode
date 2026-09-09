@@ -98,6 +98,17 @@ export default function Home() {
               className="h-7 w-auto sm:h-8"
             />
           </a>
+          <div className="hidden items-center gap-6 text-sm font-medium text-text-muted md:flex">
+            <a href="#capacidades" className="transition hover:text-primary">
+              Capacidades
+            </a>
+            <a href="#integraciones" className="transition hover:text-primary">
+              Integraciones
+            </a>
+            <a href="#contexto" className="transition hover:text-primary">
+              Contexto
+            </a>
+          </div>
           <ContactModal>
             <span className="hidden rounded-full border border-border-subtle px-5 py-2.5 text-sm font-medium text-text-muted transition hover:border-border-active hover:text-text-primary sm:inline-flex">
               Agenda una demo
@@ -206,7 +217,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto grid w-full max-w-7xl gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[0.85fr_1.15fr] lg:px-12">
+      <section
+        id="contexto"
+        className="relative mx-auto grid w-full max-w-7xl scroll-mt-24 gap-8 px-6 py-20 sm:px-10 lg:grid-cols-[0.85fr_1.15fr] lg:px-12"
+      >
         <ScrollReveal>
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
             Contexto reutilizable
@@ -243,7 +257,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
+      <section
+        id="integraciones"
+        className="relative mx-auto w-full max-w-7xl scroll-mt-24 px-6 py-20 sm:px-10 lg:px-12"
+      >
         <ScrollReveal className="border-glow rounded-[2.5rem] border border-border-subtle bg-surface/80 p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
