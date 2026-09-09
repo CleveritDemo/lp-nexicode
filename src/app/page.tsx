@@ -15,6 +15,7 @@ import {
 import { ContactModal } from "@/components/contact-modal";
 import { ProductMockup } from "@/components/product-mockup";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { StickyCapabilities } from "@/components/sticky-capabilities";
 import { assetPath } from "@/lib/asset-path";
 
 const workspaceFeatures = [
@@ -145,6 +146,8 @@ export default function Home() {
 
         </div>
       </section>
+
+      <StickyCapabilities />
 
       <section
         id="funcionalidades"
