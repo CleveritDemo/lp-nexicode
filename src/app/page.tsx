@@ -17,6 +17,7 @@ import {
 import { ContactModal } from "@/components/contact-modal";
 import { CookieBanner } from "@/components/cookie-banner";
 import { CookiesModal } from "@/components/cookies-modal";
+import DotField from "@/components/dot-field";
 import { useLanguage } from "@/components/language-provider";
 import { ProductMockup } from "@/components/product-mockup";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -26,7 +27,7 @@ import { assetPath } from "@/lib/asset-path";
 
 const copy = {
   es: {
-    heroBadge: "Terminal de escritorio para macOS",
+    heroBadge: "Terminal de escritorio",
     heroTitle: "Todo tu flujo de desarrollo en un solo workspace inteligente.",
     heroDescription:
       "Nexi code reúne shells, archivos, Git y agentes de programación en una terminal visual diseñada para equipos que necesitan moverse más rápido sin perder control.",
@@ -61,9 +62,17 @@ const copy = {
     footerNote:
       "Diseñado para equipos que quieren acelerar su desarrollo sin perder visibilidad, contexto ni control operativo.",
     rights: "Todos los derechos reservados.",
+    downloadEyebrow: "Descarga",
+    downloadTitle: "Instala Nexi code en tu sistema operativo.",
+    downloadDescription:
+      "Disponible para macOS, Windows y Linux. Descarga la versión que necesitas y empieza a trabajar en minutos.",
+    downloadMac: "macOS",
+    downloadWindows: "Windows",
+    downloadLinux: "Linux",
+    downloadSoon: "Próximamente",
   },
   en: {
-    heroBadge: "Desktop terminal for macOS",
+    heroBadge: "Desktop terminal",
     heroTitle: "Your entire development workflow in one intelligent workspace.",
     heroDescription:
       "Nexi code brings shells, files, Git and programming agents into a visual terminal built for teams that need to move faster without losing control.",
@@ -98,6 +107,14 @@ const copy = {
     footerNote:
       "Designed for teams that want to accelerate development without losing visibility, context or operational control.",
     rights: "All rights reserved.",
+    downloadEyebrow: "Download",
+    downloadTitle: "Install Nexi code on your operating system.",
+    downloadDescription:
+      "Available for macOS, Windows and Linux. Download the version you need and start working in minutes.",
+    downloadMac: "macOS",
+    downloadWindows: "Windows",
+    downloadLinux: "Linux",
+    downloadSoon: "Coming soon",
   },
 };
 
@@ -415,11 +432,90 @@ export default function Home() {
       </section>
 
       <section
-        id="contacto"
-        className="relative mx-auto w-full max-w-7xl px-6 py-20 sm:px-10 lg:px-12"
+        id="descarga"
+        className="relative w-full overflow-hidden py-20"
       >
-        <ScrollReveal className="border-glow overflow-hidden rounded-[2.5rem] border border-border-active bg-primary p-8 text-primary-fg sm:p-12 lg:p-16">
-          <div className="max-w-3xl">
+        <DotField
+          className="pointer-events-auto !absolute inset-0 z-0"
+          dotRadius={1.5}
+          dotSpacing={16}
+          cursorRadius={400}
+          bulgeStrength={50}
+          gradientFrom="rgba(52, 224, 164, 0.5)"
+          gradientTo="rgba(52, 224, 164, 0.2)"
+          glowColor="transparent"
+        />
+        <ScrollReveal className="relative z-10 mx-auto max-w-3xl px-6 text-center sm:px-10 lg:px-12">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
+            {t.downloadEyebrow}
+          </p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-text-primary sm:text-5xl">
+            {t.downloadTitle}
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-text-muted">
+            {t.downloadDescription}
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            {/* macOS */}
+            <a
+              href="#"
+              className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
+            >
+              <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8.286 7.008c-3.216 0 -4.286 3.23 -4.286 5.92c0 3.229 2.143 8.072 4.286 8.072c1.165 -.05 1.799 -.538 3.214 -.538c1.406 0 1.607 .538 3.214 .538s4.286 -3.229 4.286 -5.381c-.03 -.011 -2.649 -.434 -2.679 -3.23c-.02 -2.335 2.589 -3.179 2.679 -3.228c-1.096 -1.606 -3.162 -2.113 -3.75 -2.153c-1.535 -.12 -3.032 1.077 -3.75 1.077c-.729 0 -2.036 -1.077 -3.214 -1.077" />
+                <path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2" />
+              </svg>
+              {t.downloadMac}
+            </a>
+
+            {/* Windows */}
+            <a
+              href="#"
+              className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
+            >
+              <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.8 20l-12 -1.5c-1 -.1 -1.8 -.9 -1.8 -1.9v-9.2c0 -1 .8 -1.8 1.8 -1.9l12 -1.5c1.2 -.1 2.2 .8 2.2 1.9v12.1c0 1.2 -1.1 2.1 -2.2 1.9l0 .1" />
+                <path d="M12 5l0 14" />
+                <path d="M4 12l16 0" />
+              </svg>
+              {t.downloadWindows}
+            </a>
+
+            {/* Linux */}
+            <a
+              href="#"
+              className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-border-subtle bg-surface-elevated/80 px-6 text-base font-semibold text-text-primary backdrop-blur-sm transition hover:border-primary hover:bg-primary/10 hover:text-primary sm:w-auto sm:min-w-[180px]"
+            >
+              <svg className="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10 5a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M17.723 7.41a7.992 7.992 0 0 0 -3.74 -2.162m-3.971 0a7.993 7.993 0 0 0 -3.789 2.216m-1.881 3.215a8 8 0 0 0 -.342 2.32c0 .738 .1 1.453 .287 2.132m1.96 3.428a7.993 7.993 0 0 0 3.759 2.19m4 0a7.993 7.993 0 0 0 3.747 -2.186m1.962 -3.43a8.008 8.008 0 0 0 .287 -2.131c0 -.764 -.107 -1.503 -.307 -2.203" />
+                <path d="M3 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M17 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              </svg>
+              {t.downloadLinux}
+            </a>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section
+        id="contacto"
+        className="relative w-full overflow-hidden py-20"
+      >
+        <DotField
+          className="pointer-events-auto !absolute inset-0 z-0"
+          dotRadius={1.5}
+          dotSpacing={16}
+          cursorRadius={400}
+          bulgeStrength={50}
+          gradientFrom="rgba(52, 224, 164, 0.5)"
+          gradientTo="rgba(52, 224, 164, 0.2)"
+          glowColor="transparent"
+        />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
+          <ScrollReveal className="border-glow overflow-hidden rounded-[2.5rem] border border-border-active bg-primary p-8 text-primary-fg sm:p-12 lg:p-16">
+            <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.35em] opacity-70">
               {t.ctaEyebrow}
             </p>
@@ -436,9 +532,10 @@ export default function Home() {
             </ContactModal>
           </div>
         </ScrollReveal>
+        </div>
       </section>
 
-      <footer className="relative border-t border-border-subtle bg-canvas px-6 py-14 sm:px-10 lg:px-12">
+      <footer className="relative border-t border-primary/10 bg-[#080C0A] px-6 py-14 sm:px-10 lg:px-12">
         <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div className="max-w-md">
             <a href="#" className="inline-flex" aria-label="Nexi code">
@@ -488,7 +585,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="border-t border-border-subtle pt-6 text-center text-sm text-text-dim lg:col-span-2">
+          <div className="border-t border-primary/15 pt-6 text-center text-sm text-text-dim lg:col-span-2">
             <p>
               © {new Date().getFullYear()} Nexi code. {t.rights}
             </p>
