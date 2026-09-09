@@ -26,6 +26,7 @@ body {
 
 .border-glow {
   position: relative;
+  background-clip: padding-box;
 }
 
 .border-glow::before {
@@ -43,17 +44,21 @@ body {
     transparent 230deg,
     transparent 360deg
   );
-  padding: 1px;
   opacity: 0;
   pointer-events: none;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 0,
+    1px 1px,
+    1px calc(100% - 1px),
+    calc(100% - 1px) calc(100% - 1px),
+    calc(100% - 1px) 1px,
+    1px 1px
+  );
+  clip-rule: evenodd;
   transition: opacity 260ms ease;
 }
 
