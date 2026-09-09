@@ -123,7 +123,7 @@ const DotField = memo(function DotField({
 
     function onMouseMove(e: MouseEvent) {
       const s = sizeRef.current;
-      const el = canvas.parentElement;
+      const el = canvas?.parentElement;
       const isFixed = el && getComputedStyle(el).position === "fixed";
       if (isFixed) {
         mouseRef.current.x = e.clientX - s.offsetX;
