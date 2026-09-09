@@ -13,6 +13,8 @@ import {
   Workflow,
 } from "lucide-react";
 import { ContactModal } from "@/components/contact-modal";
+import { CookieBanner } from "@/components/cookie-banner";
+import { CookiesModal } from "@/components/cookies-modal";
 import { ProductMockup } from "@/components/product-mockup";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteNavbar } from "@/components/site-navbar";
@@ -65,18 +67,42 @@ const integrationCards = [
   },
 ];
 
-const footerColumns = [
+type FooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  action?: "cookies";
+};
+
+type FooterColumn = {
+  title: string;
+  links: FooterLink[];
+};
+
+const footerColumns: FooterColumn[] = [
   {
     title: "Producto",
-    links: ["Funcionalidades", "Integraciones", "Agentes", "Demo"],
+    links: [
+      { label: "Funcionalidades", href: "#funcionalidades" },
+      { label: "Integraciones", href: "#integraciones" },
+      { label: "Agentes", href: "#funcionalidades" },
+      { label: "Demo", href: "#contacto" },
+    ],
   },
   {
     title: "Empresa",
-    links: ["Sobre nosotros", "Contacto", "Soporte"],
+    links: [
+      { label: "Raven", href: "https://www.raven.inc/en", external: true },
+      { label: "Contacto", href: "#contacto" },
+    ],
   },
   {
     title: "Legal",
-    links: ["Privacidad", "Términos", "Seguridad"],
+    links: [
+      { label: "Privacidad", href: "/privacidad" },
+      { label: "Términos", href: "/terminos" },
+      { label: "Cookies", href: "#", action: "cookies" },
+    ],
   },
 ];
 
@@ -340,15 +366,24 @@ export default function Home() {
                   {column.title}
                 </h2>
                 <div className="mt-4 flex flex-col gap-3 text-sm text-text-muted">
-                  {column.links.map((link) => (
-                    <a
-                      key={link}
-                      href={link === "Demo" || link === "Contacto" ? "#contacto" : "#funcionalidades"}
-                      className="transition hover:text-primary"
-                    >
-                      {link}
-                    </a>
-                  ))}
+                  {column.links.map((link) =>
+                    link.action === "cookies" ? (
+                      <CookiesModal key={link.label}>
+                        <span className="cursor-pointer text-left transition hover:text-primary">
+                          {link.label}
+                        </span>
+                      </CookiesModal>
+                    ) : (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="transition hover:text-primary"
+                      >
+                        {link.label}
+                      </a>
+                    ),
+                  )}
                 </div>
               </div>
             ))}
@@ -361,6 +396,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <CookieBanner />
     </main>
   );
 }
