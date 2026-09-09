@@ -4,16 +4,20 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { ContactModal } from "@/components/contact-modal";
+import { LanguageSwitch } from "@/components/language-switch";
+import { useLanguage } from "@/components/language-provider";
 import { assetPath } from "@/lib/asset-path";
 
 const navLinks = [
-  { label: "Capacidades", href: "#capacidades" },
-  { label: "Integraciones", href: "#integraciones" },
-  { label: "Contexto", href: "#contexto" },
+  { label: { es: "Capacidades", en: "Capabilities" }, href: "#capacidades" },
+  { label: { es: "Integraciones", en: "Integrations" }, href: "#integraciones" },
+  { label: { es: "Contexto", en: "Context" }, href: "#contexto" },
 ];
 
 export function SiteNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language } = useLanguage();
+  const demoLabel = language === "es" ? "Agenda una demo" : "Book a demo";
 
   return (
     <header className="fixed inset-x-0 top-5 z-50 px-4 sm:px-10 lg:px-12">
@@ -33,15 +37,16 @@ export function SiteNavbar() {
           <div className="hidden items-center gap-6 text-sm font-medium text-text-muted md:flex">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="transition hover:text-primary">
-                {link.label}
+                {link.label[language]}
               </a>
             ))}
           </div>
 
-          <div className="hidden sm:block">
+          <div className="hidden items-center gap-3 sm:flex">
+            <LanguageSwitch />
             <ContactModal>
               <span className="inline-flex rounded-full border border-border-subtle px-5 py-2.5 text-sm font-medium text-text-muted transition hover:border-border-active hover:text-text-primary">
-                Agenda una demo
+                {demoLabel}
               </span>
             </ContactModal>
           </div>
@@ -72,14 +77,17 @@ export function SiteNavbar() {
                     onClick={() => setIsOpen(false)}
                     className="rounded-2xl px-4 py-3 transition hover:bg-surface-subtle hover:text-primary"
                   >
-                    {link.label}
+                    {link.label[language]}
                   </a>
                 ))}
               </div>
               <div className="mt-3 sm:hidden">
+                <div className="mb-3">
+                  <LanguageSwitch />
+                </div>
                 <ContactModal>
                   <span className="inline-flex h-12 w-full items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-fg transition hover:bg-primary-hover">
-                    Agenda una demo
+                    {demoLabel}
                   </span>
                 </ContactModal>
               </div>

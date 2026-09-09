@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { LanguageProvider } from "@/components/language-provider";
 import { assetPath } from "@/lib/asset-path";
 import "./globals.css";
 
@@ -85,7 +86,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">{children}</body>
+      <body className="min-h-full bg-background text-foreground">
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   BookOpen,
@@ -15,55 +17,158 @@ import {
 import { ContactModal } from "@/components/contact-modal";
 import { CookieBanner } from "@/components/cookie-banner";
 import { CookiesModal } from "@/components/cookies-modal";
+import { useLanguage } from "@/components/language-provider";
 import { ProductMockup } from "@/components/product-mockup";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteNavbar } from "@/components/site-navbar";
 import { StickyCapabilities } from "@/components/sticky-capabilities";
 import { assetPath } from "@/lib/asset-path";
 
-const workspaceFeatures = [
-  "Pestañas persistentes con hasta cuatro paneles redimensionables y reordenables.",
-  "Terminales reales mediante node-pty con restauración de cwd, scrollback e historial.",
-  "Explorador de archivos con búsqueda, operaciones rápidas y editor CodeMirror integrado.",
-  "Panel Git para revisar cambios, stage, unstage, commit, pull y push sin cambiar de app.",
-];
+const copy = {
+  es: {
+    heroBadge: "Terminal de escritorio para macOS",
+    heroTitle: "Todo tu flujo de desarrollo en un solo workspace inteligente.",
+    heroDescription:
+      "Nexi code reúne shells, archivos, Git y agentes de programación en una terminal visual diseñada para equipos que necesitan moverse más rápido sin perder control.",
+    contactAgent: "Contactar a un agente",
+    exploreFeatures: "Explorar funcionalidades",
+    featuresEyebrow: "Funcionalidades",
+    featuresTitle: "Una terminal que entiende el proyecto, no solo comandos.",
+    featuresDescription:
+      "Nexi code reduce el cambio de contexto entre consola, editor, repositorio, issues y agentes. Todo vive en pestañas persistentes preparadas para trabajos largos y sesiones que puedes retomar.",
+    workspaceLabel: "Workspace",
+    workspaceTitle: "Shells, archivos y Git en el mismo lugar",
+    agentsLabel: "Agentes",
+    agentsTitle: "Programación asistida con control real",
+    contextEyebrow: "Contexto reutilizable",
+    contextTitle: "Dale al agente exactamente lo que necesita.",
+    contextDescription:
+      "Cada pestaña puede acumular contexto propio para que una conversación continúe con la información correcta: código, notas, estado del repo y dependencias relevantes.",
+    contextCardDescription:
+      "Disponible como señal de trabajo para terminales, agentes y decisiones dentro del workspace.",
+    integrationsEyebrow: "Integraciones",
+    integrationsTitle: "Conecta el trabajo real de tu equipo.",
+    productEyebrow: "Producto",
+    productTitle: "Una interfaz real para coordinar agentes, terminales y contexto.",
+    productDescription:
+      "El workspace de Nexi code mantiene el foco en el flujo activo: agentes a la izquierda, acciones rápidas a la derecha y un composer inferior para conversar con el contexto correcto.",
+    ctaEyebrow: "Solicita una demo",
+    ctaTitle: "Habla con un agente y ve Nexi code aplicado a tu flujo.",
+    ctaDescription:
+      "Cuéntanos cómo trabaja tu equipo hoy y te mostraremos una demo orientada a terminales, Git, Jira, agentes de programación y contexto reutilizable.",
+    footerDescription:
+      "Terminal inteligente para equipos que trabajan con código, agentes, Git e integraciones en un solo espacio.",
+    footerNote:
+      "Diseñado para equipos que quieren acelerar su desarrollo sin perder visibilidad, contexto ni control operativo.",
+    rights: "Todos los derechos reservados.",
+  },
+  en: {
+    heroBadge: "Desktop terminal for macOS",
+    heroTitle: "Your entire development workflow in one intelligent workspace.",
+    heroDescription:
+      "Nexi code brings shells, files, Git and programming agents into a visual terminal built for teams that need to move faster without losing control.",
+    contactAgent: "Contact an agent",
+    exploreFeatures: "Explore features",
+    featuresEyebrow: "Features",
+    featuresTitle: "A terminal that understands the project, not just commands.",
+    featuresDescription:
+      "Nexi code reduces context switching between console, editor, repository, issues and agents. Everything lives in persistent tabs ready for long-running work and sessions you can resume.",
+    workspaceLabel: "Workspace",
+    workspaceTitle: "Shells, files and Git in the same place",
+    agentsLabel: "Agents",
+    agentsTitle: "Assisted programming with real control",
+    contextEyebrow: "Reusable context",
+    contextTitle: "Give the agent exactly what it needs.",
+    contextDescription:
+      "Each tab can keep its own context so a conversation continues with the right information: code, notes, repository status and relevant dependencies.",
+    contextCardDescription:
+      "Available as working signal for terminals, agents and decisions inside the workspace.",
+    integrationsEyebrow: "Integrations",
+    integrationsTitle: "Connect your team's real work.",
+    productEyebrow: "Product",
+    productTitle: "A real interface to coordinate agents, terminals and context.",
+    productDescription:
+      "The Nexi code workspace keeps focus on the active flow: agents on the left, quick actions on the right and a bottom composer to chat with the right context.",
+    ctaEyebrow: "Request a demo",
+    ctaTitle: "Talk to an agent and see Nexi code applied to your workflow.",
+    ctaDescription:
+      "Tell us how your team works today and we'll show you a demo focused on terminals, Git, Jira, programming agents and reusable context.",
+    footerDescription:
+      "An intelligent terminal for teams working with code, agents, Git and integrations in one space.",
+    footerNote:
+      "Designed for teams that want to accelerate development without losing visibility, context or operational control.",
+    rights: "All rights reserved.",
+  },
+};
 
-const agentFeatures = [
-  "Paneles para Claude Code y Cursor Agent ejecutados con CLIs instaladas localmente.",
-  "Modos Ask, Auto y Plan para controlar permisos según el nivel de autonomía requerido.",
-  "Selector de modelo, cancelación de tareas y reanudación de conversaciones.",
-  "Contextos reutilizables por pestaña para que cada agente entienda el trabajo activo.",
-];
+const workspaceFeatures = {
+  es: [
+    "Pestañas persistentes con hasta cuatro paneles redimensionables y reordenables.",
+    "Terminales reales mediante node-pty con restauración de cwd, scrollback e historial.",
+    "Explorador de archivos con búsqueda, operaciones rápidas y editor CodeMirror integrado.",
+    "Panel Git para revisar cambios, stage, unstage, commit, pull y push sin cambiar de app.",
+  ],
+  en: [
+    "Persistent tabs with up to four resizable and reorderable panes.",
+    "Real terminals powered by node-pty with cwd restore, scrollback and command history.",
+    "File explorer with search, quick file operations and an integrated CodeMirror editor.",
+    "Git panel to review changes, stage, unstage, commit, pull and push without switching apps.",
+  ],
+};
+
+const agentFeatures = {
+  es: [
+    "Paneles para Claude Code y Cursor Agent ejecutados con CLIs instaladas localmente.",
+    "Modos Ask, Auto y Plan para controlar permisos según el nivel de autonomía requerido.",
+    "Selector de modelo, cancelación de tareas y reanudación de conversaciones.",
+    "Contextos reutilizables por pestaña para que cada agente entienda el trabajo activo.",
+  ],
+  en: [
+    "Panels for Claude Code and Cursor Agent running through locally installed CLIs.",
+    "Ask, Auto and Plan modes to control permissions based on the autonomy level required.",
+    "Model selector, task cancellation and conversation resume.",
+    "Reusable context per tab so each agent understands the active work.",
+  ],
+};
 
 const contextItems = [
-  { title: "Árbol de carpetas", icon: FolderTree },
-  { title: "Archivos", icon: FileText },
-  { title: "Símbolos", icon: FileCode2 },
-  { title: "Notas", icon: NotebookPen },
-  { title: "Estado de Git", icon: GitBranch },
-  { title: "Dependencias", icon: Boxes },
-  { title: "README", icon: BookOpen },
-  { title: "Issues de Jira", icon: Ticket },
+  { title: { es: "Árbol de carpetas", en: "Folder tree" }, icon: FolderTree },
+  { title: { es: "Archivos", en: "Files" }, icon: FileText },
+  { title: { es: "Símbolos", en: "Symbols" }, icon: FileCode2 },
+  { title: { es: "Notas", en: "Notes" }, icon: NotebookPen },
+  { title: { es: "Estado de Git", en: "Git status" }, icon: GitBranch },
+  { title: { es: "Dependencias", en: "Dependencies" }, icon: Boxes },
+  { title: { es: "README", en: "README" }, icon: BookOpen },
+  { title: { es: "Issues de Jira", en: "Jira issues" }, icon: Ticket },
 ];
 
 const integrationCards = [
   {
-    title: "Jira Cloud nativo",
+    title: { es: "Jira Cloud nativo", en: "Native Jira Cloud" },
     icon: CloudCog,
     description:
-      "Menciona una issue en el composer y su ficha viaja como contexto del turno para que el agente trabaje con la historia completa.",
+      {
+        es: "Menciona una issue en el composer y su ficha viaja como contexto del turno para que el agente trabaje con la historia completa.",
+        en: "Mention an issue in the composer and its card travels as turn context so the agent works with the full story.",
+      },
   },
   {
-    title: "GitHub Actions visible",
+    title: { es: "GitHub Actions visible", en: "Visible GitHub Actions" },
     icon: Workflow,
     description:
-      "Consulta el estado de pipelines con token, variable de entorno o credenciales de Git sin romper tu flujo de desarrollo.",
+      {
+        es: "Consulta el estado de pipelines con token, variable de entorno o credenciales de Git sin romper tu flujo de desarrollo.",
+        en: "Check pipeline status with a token, environment variable or Git credentials without breaking your development flow.",
+      },
   },
   {
-    title: "Experiencia configurable",
+    title: { es: "Experiencia configurable", en: "Configurable experience" },
     icon: Languages,
     description:
-      "Temas, tamaño de fuente, interfaz en español o inglés y controles opcionales de Spotify en la barra de título.",
+      {
+        es: "Temas, tamaño de fuente, interfaz en español o inglés y controles opcionales de Spotify en la barra de título.",
+        en: "Themes, font size, Spanish or English interface and optional Spotify controls in the title bar.",
+      },
   },
 ];
 
@@ -107,6 +212,11 @@ const footerColumns: FooterColumn[] = [
 ];
 
 export default function Home() {
+  const { language } = useLanguage();
+  const t = copy[language];
+  const currentWorkspaceFeatures = workspaceFeatures[language];
+  const currentAgentFeatures = agentFeatures[language];
+
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-canvas text-text-primary">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_color-mix(in_srgb,var(--color-primary)_22%,transparent),_transparent_34%),radial-gradient(circle_at_80%_20%,_color-mix(in_srgb,var(--color-border-active)_34%,transparent),_transparent_30%),linear-gradient(135deg,_var(--color-surface),_var(--color-canvas))]" />
@@ -120,30 +230,28 @@ export default function Home() {
             <div className="mx-auto max-w-5xl">
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border-active bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
               <span className="size-2 rounded-full bg-primary shadow-[0_0_22px_var(--color-primary)]" />
-              Terminal de escritorio para macOS
+              {t.heroBadge}
             </div>
 
             <h1 className="mx-auto max-w-5xl text-balance text-5xl font-semibold tracking-[-0.05em] text-text-primary sm:text-6xl lg:text-7xl">
-              Todo tu flujo de desarrollo en un solo workspace inteligente.
+              {t.heroTitle}
             </h1>
 
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-text-muted sm:text-xl">
-              Nexi code reúne shells, archivos, Git y agentes de programación en
-              una terminal visual diseñada para equipos que necesitan moverse más
-              rápido sin perder control.
+              {t.heroDescription}
             </p>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <ContactModal>
                 <span className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-fg transition hover:bg-primary-hover">
-                  Contactar a un agente
+                  {t.contactAgent}
                 </span>
               </ContactModal>
               <a
                 href="#funcionalidades"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-white px-7 text-base font-semibold text-white transition hover:bg-white hover:text-primary-fg"
               >
-                Explorar funcionalidades
+                {t.exploreFeatures}
               </a>
             </div>
             </div>
@@ -164,15 +272,13 @@ export default function Home() {
       >
         <ScrollReveal className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
-            Funcionalidades
+            {t.featuresEyebrow}
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-text-primary sm:text-5xl">
-            Una terminal que entiende el proyecto, no solo comandos.
+            {t.featuresTitle}
           </h2>
           <p className="mt-5 text-lg leading-8 text-text-muted">
-            Nexi code reduce el cambio de contexto entre consola, editor,
-            repositorio, issues y agentes. Todo vive en pestañas persistentes
-            preparadas para trabajos largos y sesiones que puedes retomar.
+            {t.featuresDescription}
           </p>
         </ScrollReveal>
 
@@ -181,12 +287,12 @@ export default function Home() {
             className="border-glow rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
             delay={100}
           >
-            <span className="text-sm font-medium text-primary">Workspace</span>
+            <span className="text-sm font-medium text-primary">{t.workspaceLabel}</span>
             <h3 className="mt-3 text-2xl font-semibold text-text-primary">
-              Shells, archivos y Git en el mismo lugar
+              {t.workspaceTitle}
             </h3>
             <div className="mt-6 space-y-4">
-              {workspaceFeatures.map((feature) => (
+              {currentWorkspaceFeatures.map((feature) => (
                 <div key={feature} className="flex gap-3 text-text-muted">
                   <span className="mt-2 size-2 shrink-0 rounded-full bg-primary" />
                   <p>{feature}</p>
@@ -199,12 +305,12 @@ export default function Home() {
             className="border-glow rounded-[2rem] border border-border-subtle bg-surface/80 p-6 sm:p-8"
             delay={200}
           >
-            <span className="text-sm font-medium text-primary">Agentes</span>
+            <span className="text-sm font-medium text-primary">{t.agentsLabel}</span>
             <h3 className="mt-3 text-2xl font-semibold text-text-primary">
-              Programación asistida con control real
+              {t.agentsTitle}
             </h3>
             <div className="mt-6 space-y-4">
-              {agentFeatures.map((feature) => (
+              {currentAgentFeatures.map((feature) => (
                 <div key={feature} className="flex gap-3 text-text-muted">
                   <span className="mt-2 size-2 shrink-0 rounded-full bg-primary" />
                   <p>{feature}</p>
@@ -221,22 +327,20 @@ export default function Home() {
       >
         <ScrollReveal>
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
-            Contexto reutilizable
+            {t.contextEyebrow}
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-text-primary sm:text-5xl">
-            Dale al agente exactamente lo que necesita.
+            {t.contextTitle}
           </h2>
           <p className="mt-5 text-lg leading-8 text-text-muted">
-            Cada pestaña puede acumular contexto propio para que una conversación
-            continúe con la información correcta: código, notas, estado del repo
-            y dependencias relevantes.
+            {t.contextDescription}
           </p>
         </ScrollReveal>
 
         <div className="grid gap-3 sm:grid-cols-2">
           {contextItems.map(({ title, icon: Icon }, index) => (
             <ScrollReveal
-              key={title}
+              key={title.es}
               className={`border-glow group rounded-3xl border border-border-subtle bg-surface-elevated p-5 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40 ${
                 index % 2 === 0 ? "sm:-translate-y-8" : "sm:translate-y-14"
               }`}
@@ -244,11 +348,10 @@ export default function Home() {
             >
               <Icon className="size-6 text-text-dim transition group-hover:translate-z-4 group-hover:text-primary" />
               <p className="mt-4 text-lg font-semibold text-text-primary transition group-hover:text-primary">
-                {title}
+                {title[language]}
               </p>
               <p className="mt-2 text-sm leading-6 text-text-muted">
-                Disponible como señal de trabajo para terminales, agentes y
-                decisiones dentro del workspace.
+                {t.contextCardDescription}
               </p>
             </ScrollReveal>
           ))}
@@ -263,25 +366,27 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
-                Integraciones
+                {t.integrationsEyebrow}
               </p>
               <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-text-primary sm:text-5xl">
-                Conecta el trabajo real de tu equipo.
+                {t.integrationsTitle}
               </h2>
             </div>
 
             <div className="grid gap-4">
               {integrationCards.map(({ title, icon: Icon, description }, index) => (
                 <ScrollReveal
-                  key={title}
+                  key={title.es}
                   className="border-glow group rounded-3xl border border-border-subtle bg-surface-elevated p-6 transition duration-300 [transform-style:preserve-3d] hover:scale-[1.025] hover:rotate-x-2 hover:-rotate-y-2 hover:border-border-active hover:bg-surface-subtle hover:shadow-2xl hover:shadow-black/40"
                   delay={index * 80}
                 >
                   <Icon className="size-6 text-text-dim transition group-hover:translate-z-4 group-hover:text-primary" />
                   <h3 className="mt-4 text-xl font-semibold text-text-primary transition group-hover:text-primary">
-                    {title}
+                    {title[language]}
                   </h3>
-                  <p className="mt-3 leading-7 text-text-muted">{description}</p>
+                  <p className="mt-3 leading-7 text-text-muted">
+                    {description[language]}
+                  </p>
                 </ScrollReveal>
               ))}
             </div>
@@ -293,15 +398,13 @@ export default function Home() {
         <ScrollReveal>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">
-              Producto
+              {t.productEyebrow}
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-text-primary sm:text-5xl">
-              Una interfaz real para coordinar agentes, terminales y contexto.
+              {t.productTitle}
             </h2>
             <p className="mt-5 text-lg leading-8 text-text-muted">
-              El workspace de Nexi code mantiene el foco en el flujo activo: agentes
-              a la izquierda, acciones rápidas a la derecha y un composer inferior
-              para conversar con el contexto correcto.
+              {t.productDescription}
             </p>
           </div>
         </ScrollReveal>
@@ -318,19 +421,17 @@ export default function Home() {
         <ScrollReveal className="border-glow overflow-hidden rounded-[2.5rem] border border-border-active bg-primary p-8 text-primary-fg sm:p-12 lg:p-16">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.35em] opacity-70">
-              Solicita una demo
+              {t.ctaEyebrow}
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-6xl">
-              Habla con un agente y ve Nexi code aplicado a tu flujo.
+              {t.ctaTitle}
             </h2>
             <p className="mt-6 text-lg leading-8 opacity-80">
-              Cuéntanos cómo trabaja tu equipo hoy y te mostraremos una demo
-              orientada a terminales, Git, Jira, agentes de programación y
-              contexto reutilizable.
+              {t.ctaDescription}
             </p>
             <ContactModal>
               <span className="mt-10 inline-flex h-14 items-center justify-center rounded-full bg-primary-fg px-7 text-base font-semibold text-primary transition hover:opacity-90">
-                Contactar a un agente
+                {t.contactAgent}
               </span>
             </ContactModal>
           </div>
@@ -350,12 +451,10 @@ export default function Home() {
               />
             </a>
             <p className="mt-3 max-w-md text-sm leading-6 text-text-muted">
-              Terminal inteligente para equipos que trabajan con código, agentes,
-              Git e integraciones en un solo espacio.
+              {t.footerDescription}
             </p>
             <p className="mt-5 text-sm text-text-dim">
-              Diseñado para equipos que quieren acelerar su desarrollo sin perder
-              visibilidad, contexto ni control operativo.
+              {t.footerNote}
             </p>
           </div>
 
@@ -391,7 +490,7 @@ export default function Home() {
 
           <div className="border-t border-border-subtle pt-6 text-center text-sm text-text-dim lg:col-span-2">
             <p>
-              © {new Date().getFullYear()} Nexi code. Todos los derechos reservados.
+              © {new Date().getFullYear()} Nexi code. {t.rights}
             </p>
           </div>
         </div>
