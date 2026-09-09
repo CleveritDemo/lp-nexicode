@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://cleveritdemo.github.io/lp-nexicode/",
+      url: "https://nexicode.ai/",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,

@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://cleveritdemo.github.io/lp-nexicode/sitemap.xml",
+    sitemap: "https://nexicode.ai/sitemap.xml",
   };
 }

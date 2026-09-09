@@ -14,13 +14,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://cleveritdemo.github.io/lp-nexicode";
+const siteUrl = "https://nexicode.ai";
 const title = "Nexi code | Terminal inteligente para equipos de desarrollo";
 const description =
   "Nexi code reúne terminales, archivos, Git, Jira, GitHub Actions y agentes de programación en un solo workspace para macOS.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cleveritdemo.github.io"),
+  metadataBase: new URL("https://nexicode.ai"),
   title,
   description,
   applicationName: "Nexi code",
