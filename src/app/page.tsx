@@ -81,7 +81,7 @@ const footerColumns = [
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-canvas text-text-primary">
+    <main className="relative min-h-screen overflow-x-hidden bg-canvas text-text-primary">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_color-mix(in_srgb,var(--color-primary)_22%,transparent),_transparent_34%),radial-gradient(circle_at_80%_20%,_color-mix(in_srgb,var(--color-border-active)_34%,transparent),_transparent_30%),linear-gradient(135deg,_var(--color-surface),_var(--color-canvas))]" />
       <div className="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
 

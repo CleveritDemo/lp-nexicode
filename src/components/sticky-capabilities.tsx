@@ -39,7 +39,7 @@ export function StickyCapabilities() {
       }
 
       const rect = section.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
+      const scrollable = Math.max(rect.height - window.innerHeight, 1);
       const progress = Math.min(Math.max(-rect.top / scrollable, 0), 0.999);
       setActiveIndex(Math.floor(progress * capabilities.length));
     }
@@ -55,7 +55,7 @@ export function StickyCapabilities() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[260vh] px-6 sm:px-10 lg:px-12">
+    <section ref={sectionRef} className="relative h-[300vh] px-6 sm:px-10 lg:px-12">
       <div className="sticky top-0 mx-auto flex min-h-screen w-full max-w-7xl items-center py-20">
         <div className="grid w-full items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
