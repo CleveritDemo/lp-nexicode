@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CookiesModal } from "@/components/cookies-modal";
 
 const CONSENT_KEY = "cookie-consent";
 
 export function CookieBanner() {
-  const [visible, setVisible] = useState(
-    () => typeof window !== "undefined" && !localStorage.getItem(CONSENT_KEY),
-  );
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(CONSENT_KEY)) {
+      setVisible(true);
+    }
+  }, []);
 
   function handleAcceptAll() {
     localStorage.setItem(CONSENT_KEY, "all");
